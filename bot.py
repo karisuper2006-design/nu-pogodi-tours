@@ -21,8 +21,8 @@ from telegram.ext import (
 )
 
 # ===== Configuration =====
-BOT_TOKEN = "REDACTED"
-ADMIN_USER_ID = 784414110
+BOT_TOKEN = os.environ["BOT_TOKEN"]
+ADMIN_USER_ID = int(os.environ["ADMIN_USER_ID"])
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(PROJECT_DIR, "tours_data.json")
 DATA_JS_FILE = os.path.join(PROJECT_DIR, "tours_data.js")
