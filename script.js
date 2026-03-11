@@ -86,6 +86,16 @@ function loadTourDates() {
   }
 }
 
+// ===== Dynamic Data Loading with Cache Buster =====
+function initDynamicLoading() {
+  const script = document.createElement('script');
+  // Add timestamp to bypass GitHub Pages 10-min cache
+  script.src = 'tours_data.js?t=' + new Date().getTime();
+  script.onload = loadTourDates;
+  script.onerror = loadTourDates; // Will show "failed to load" if error
+  document.head.appendChild(script);
+}
+
 function renderDates(container, dates) {
   if (dates.length === 0) {
     container.innerHTML = `
@@ -123,5 +133,5 @@ function renderDates(container, dates) {
   }).join('');
 }
 
-// Load dates on page load
-loadTourDates();
+// Initialize data loading
+initDynamicLoading();
