@@ -3,7 +3,7 @@ var TOURS_DATA = {
   "tour1": [
     {
       "date": "4 — 8 мая",
-      "spots": 0
+      "spots": 10
     },
     {
       "date": "7 — 11 мая",
