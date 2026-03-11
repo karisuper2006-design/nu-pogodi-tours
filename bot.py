@@ -23,7 +23,7 @@ from telegram.ext import (
 
 # ===== Configuration =====
 BOT_TOKEN = os.environ["BOT_TOKEN"]
-ADMIN_USER_ID = int(os.environ["ADMIN_USER_ID"])
+ADMIN_USER_IDS = [int(x.strip()) for x in os.environ["ADMIN_USER_ID"].split(",") if x.strip()]
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(PROJECT_DIR, "tours_data.json")
 DATA_JS_FILE = os.path.join(PROJECT_DIR, "tours_data.js")
@@ -130,7 +130,7 @@ def spots_label(spots: int) -> str:
 
 
 def is_admin(user_id: int) -> bool:
-    return user_id == ADMIN_USER_ID
+    return user_id in ADMIN_USER_IDS
 
 
 # ===== Handlers =====
