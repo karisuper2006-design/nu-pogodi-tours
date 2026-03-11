@@ -45,6 +45,26 @@ logger = logging.getLogger(__name__)
 
 
 # ===== Data helpers =====
+def setup_git_auth():
+    """Configure git remote with token auth for cloud deployment."""
+    token = os.environ.get("GITHUB_TOKEN", "")
+    if token:
+        repo_url = f"https://x-access-token:{token}@github.com/karisuper2006-design/nu-pogodi-tours.git"
+        subprocess.run(
+            ["git", "remote", "set-url", "origin", repo_url],
+            cwd=PROJECT_DIR, capture_output=True,
+        )
+        subprocess.run(
+            ["git", "config", "user.email", "bot@nu-pogodi.tours"],
+            cwd=PROJECT_DIR, capture_output=True,
+        )
+        subprocess.run(
+            ["git", "config", "user.name", "Tour Bot"],
+            cwd=PROJECT_DIR, capture_output=True,
+        )
+        logger.info("🔑 Git auth настроен через GITHUB_TOKEN")
+
+
 def git_push():
     """Commit and push data files to GitHub so the website updates."""
     try:
@@ -399,6 +419,8 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
 
 def main() -> None:
+    setup_git_auth()
+
     app = Application.builder().token(BOT_TOKEN).build()
 
     # Conversation for adding a date
@@ -433,8 +455,22 @@ def main() -> None:
     app.add_handler(CallbackQueryHandler(delete_date, pattern=r"^del:"))
     app.add_handler(CallbackQueryHandler(back_to_tours, pattern=r"^back:tours"))
 
-    logger.info("🤖 Бот запущен!")
-    app.run_polling(allowed_updates=Update.ALL_TYPES)
+    # Cloud (Render) → webhook mode; Local → polling mode
+    webhook_url = os.environ.get("RENDER_EXTERNAL_URL", "")
+    port = int(os.environ.get("PORT", "10000"))
+
+    if webhook_url:
+        logger.info(f"🌐 Webhook mode: {webhook_url}")
+        app.run_webhook(
+            listen="0.0.0.0",
+            port=port,
+            webhook_url=f"{webhook_url}/webhook",
+            url_path="webhook",
+            allowed_updates=Update.ALL_TYPES,
+        )
+    else:
+        logger.info("🤖 Polling mode (local)")
+        app.run_polling(allowed_updates=Update.ALL_TYPES)
 
 
 if __name__ == "__main__":
