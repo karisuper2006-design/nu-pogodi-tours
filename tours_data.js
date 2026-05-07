@@ -18,7 +18,7 @@ var TOURS_DATA = {
       "spots": 10
     },
     {
-      "date": "20 - 24 августа",
+      "date": "16 - 20 июля",
       "spots": 20
     }
   ],
