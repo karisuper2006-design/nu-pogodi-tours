@@ -1,21 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 <url>
 <loc>https://nupogodi-tours.ru/</loc>
-<lastmod>2026-03-16</lastmod>
+<lastmod>2026-05-16</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
+<image:image>
+<image:loc>https://nupogodi-tours.ru/images/hero-bg-light.png</image:loc>
+<image:title>Авторские походные туры по России 2026</image:title>
+<image:caption>Горы, природа и приключения — авторские туры от Ну, погоди! Весь мир!</image:caption>
+</image:image>
+<image:image>
+<image:loc>https://nupogodi-tours.ru/images/buryatia.png</image:loc>
+<image:title>Тур в Бурятию — дацан и горы</image:title>
+</image:image>
+<image:image>
+<image:loc>https://nupogodi-tours.ru/images/sakhalin.png</image:loc>
+<image:title>Тур на Сахалин — скалы и океан</image:title>
+</image:image>
 </url>
 <url>
 <loc>https://nupogodi-tours.ru/tour1.html</loc>
-<lastmod>2026-03-16</lastmod>
+<lastmod>2026-05-16</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
+<image:image>
+<image:loc>https://nupogodi-tours.ru/images/buryatia.png</image:loc>
+<image:title>Авторский тур в Бурятию и на Байкал 2026</image:title>
+<image:caption>Иволгинский дацан, горячие источники, культура Бурятии</image:caption>
+</image:image>
+<image:image>
+<image:loc>https://nupogodi-tours.ru/images/photo_2026-03-03_12-55-12.jpg</image:loc>
+<image:title>Экскурсия в Улан-Удэ</image:title>
+</image:image>
+<image:image>
+<image:loc>https://nupogodi-tours.ru/images/photo_2026-03-03_12-55-10.jpg</image:loc>
+<image:title>Иволгинский дацан</image:title>
+</image:image>
 </url>
 <url>
 <loc>https://nupogodi-tours.ru/tour2.html</loc>
-<lastmod>2026-03-16</lastmod>
+<lastmod>2026-05-16</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
+<image:image>
+<image:loc>https://nupogodi-tours.ru/images/sakhalin.png</image:loc>
+<image:title>Авторский тур на Сахалин 2026</image:title>
+<image:caption>Маяк Анива, мыс Великан, бухта Тихая и дикая природа Дальнего Востока</image:caption>
+</image:image>
+<image:image>
+<image:loc>https://nupogodi-tours.ru/images/photo_2026-03-03_12-55-42.jpg</image:loc>
+<image:title>Южно-Сахалинск</image:title>
+</image:image>
+<image:image>
+<image:loc>https://nupogodi-tours.ru/images/photo_2026-03-03_12-55-29.jpg</image:loc>
+<image:title>Маяк Анива</image:title>
+</image:image>
 </url>
 </urlset>
