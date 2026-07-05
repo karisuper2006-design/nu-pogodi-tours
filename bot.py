@@ -45,7 +45,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # GitHub API config
-GITHUB_REPO = "karisuper2006-design/nu-pogodi-tours"
+GITHUB_REPO = "Trackunsocket/nu-pogodi-tours"
 GITHUB_API = "https://api.github.com"
 
 
