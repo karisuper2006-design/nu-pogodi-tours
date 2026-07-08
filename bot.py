@@ -45,7 +45,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # GitHub API config
-GITHUB_REPO = "Trackunsocket/nu-pogodi-tours"
+GITHUB_REPO = "karisuper2006-design/nu-pogodi-tours"
 GITHUB_API = "https://api.github.com"
 
 
@@ -471,10 +471,12 @@ def main() -> None:
     app.add_handler(CallbackQueryHandler(back_to_tours, pattern=r"^back:tours"))
 
     # Cloud (Render) → webhook mode; Local → polling mode
+    # Use USE_POLLING=true to force polling (recommended for free tier)
+    use_polling = os.environ.get("USE_POLLING", "").lower() in ("true", "1", "yes")
     webhook_url = os.environ.get("RENDER_EXTERNAL_URL", "")
     port = int(os.environ.get("PORT", "10000"))
 
-    if webhook_url:
+    if webhook_url and not use_polling:
         logger.info(f"🌐 Webhook mode: {webhook_url}")
         app.run_webhook(
             listen="0.0.0.0",
@@ -484,7 +486,7 @@ def main() -> None:
             allowed_updates=Update.ALL_TYPES,
         )
     else:
-        logger.info("🤖 Polling mode (local)")
+        logger.info("🤖 Polling mode")
         app.run_polling(allowed_updates=Update.ALL_TYPES)
 
 
