@@ -8,6 +8,8 @@ import base64
 import json
 import logging
 import os
+import threading
+from http.server import HTTPServer, BaseHTTPRequestHandler
 
 import httpx
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
@@ -435,6 +437,18 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     return ConversationHandler.END
 
 
+def _health_check_server(port: int) -> None:
+    """Simple HTTP server for Render health checks."""
+    class Handler(BaseHTTPRequestHandler):
+        def do_GET(self):
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"OK")
+        def log_message(self, *args):
+            pass  # suppress request logs
+    HTTPServer(("0.0.0.0", port), Handler).serve_forever()
+
+
 def main() -> None:
     app = Application.builder().token(BOT_TOKEN).build()
 
@@ -487,6 +501,9 @@ def main() -> None:
         )
     else:
         logger.info("🤖 Polling mode")
+        if webhook_url:
+            # Start health check server so Render doesn't kill the process
+            threading.Thread(target=_health_check_server, args=(port,), daemon=True).start()
         app.run_polling(allowed_updates=Update.ALL_TYPES)
 
 
